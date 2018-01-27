@@ -1,0 +1,36 @@
+{
+  "name": "django_react",
+  "version": "1.0.0",
+  "description": "Simple React Django webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --hot --host 0.0.0.0"
+ },
+  "author": "Jinsoo Park <ddwax89@gmail.com> (https://medium.com/@urangurang)",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "webpack": "^1.15.0",
+    "webpack-dev-server": "^1.16.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^1.15.0",
+    "webpack-bundle-tracker": "0.0.93",
+    "webpack-dev-server": "^1.16.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UrangUrang/SimpleReactDjango.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UrangUrang/SimpleReactDjango/issues"
+  },
+  "homepage": "https://github.com/UrangUrang/SimpleReactDjango#readme"
+}
