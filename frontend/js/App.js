@@ -28,10 +28,10 @@ class App extends React.Component {
 	render(){
 		console.log(this.state);
 		const tooltip = (
-                	<Tooltip id="tooltip">
-                        	<strong>Click!</strong> green button to use this output for next calculation.
-                	</Tooltip>
-        	);
+			<Tooltip id="tooltip">
+				<strong>Click!</strong> green button to use this output for next calculation.
+			</Tooltip>
+		);
 
 		return (
 			<div className="App">
@@ -40,7 +40,7 @@ class App extends React.Component {
 				</div>
 				<div className="App-content">
 					<Alert bsStyle="warning">
-  						<strong>Prototype!</strong> For bugs or hugs contact <strong><a target="_blank" href="mailto:nanchasr@mail.uc.edu"> Santosh </a></strong>
+						<strong>Prototype!</strong> For bugs or hugs contact <strong><a target="_blank" href="mailto:nanchasr@mail.uc.edu"> Santosh </a></strong>
 					</Alert>
 					<div className="form-container">
 						<Form inline onSubmit={e => this.handleClick(e)}>
@@ -68,10 +68,10 @@ class App extends React.Component {
 				{ this.state.data &&
 					<div className="wellStyles well">
 						<h4>Output </h4>
-						<OverlayTrigger placement="left" overlay={tooltip}>						
+						<OverlayTrigger placement="left" overlay={tooltip}>
 							<Badge>Hint</Badge>
 						</OverlayTrigger>
-						<Button bsStyle="success" id="output" bsSize="large" block onClick={e => this.setState({ x: this.state.data.result, y: 0, data: null})}> { this.state.data.result } </Button>					
+						<Button bsStyle="success" id="output" bsSize="large" block onClick={e => this.setState({ x: this.state.data.result, y: 0, data: null})}> { this.state.data.result } </Button>
 					</div>
 				}
 			</div>
