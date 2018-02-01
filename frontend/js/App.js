@@ -11,7 +11,9 @@ class App extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		if(data == parseInt(data, 10)) {
+		if((this.state.x == parseInt(this.state.x, 10)) && (this.state.y == parseInt(this.state.y, 10))) {
+			this.state.x = parseInt(this.state.x);
+			this.state.y = parseInt(this.state.y);
 			var url = 'calculate/?x='+this.state.x+'&y='+this.state.y+'&o='+this.state.o;
 			axios({
 				url: url,
@@ -31,26 +33,26 @@ class App extends React.Component {
 	}
 
 	render(){
-		console.log(this.state);
 		const tooltip = (
 			<Tooltip id="tooltip">
-				<strong>Click!</strong> green button to use this output for next calculation.
+				<strong>Click!</strong> to use output for next calculation.
 			</Tooltip>
 		);
-		const error = this.state.data && this.state.data.status && this.state.data.status != 'fail';
+		const success = this.state.data && this.state.data.status && this.state.data.status != 'fail';
 		let outputBox = null;
-		if (error) {
-			outputBox = <Alert bsStyle="danger">
-				<strong>Error!</strong> {this.state.data.message}
-			</Alert>;
-		} else {
-			outputBox = <div className="wellStyles well">
-				<h4>Output </h4>
-				<OverlayTrigger placement="left" overlay={tooltip}>
-					<Badge>Hint</Badge>
-				</OverlayTrigger>
-				<Button bsStyle="success" id="output" bsSize="large" block onClick={e => this.setState({ x: this.state.data.result, y: 0, data: null})}> { this.state.data.result } </Button>
-			</div>;
+		if (this.state.data) {
+			const success = this.state.data.status && this.state.data.status != 'fail';
+			if (!success) {
+				outputBox = <Alert bsStyle="danger">
+					<strong>Error!</strong> {this.state.data.result}
+				</Alert>; 
+			} else {
+				outputBox = <div className="wellStyles">
+					<OverlayTrigger placement="left" overlay={tooltip}>
+						<Button bsStyle="success" id="output" bsSize="large" block onClick={e => this.setState({ x: this.state.data.result, y: 0, data: null})}> { this.state.data.result } </Button>
+					</OverlayTrigger>
+				</div>;
+			}
 		}
 
 		return (
