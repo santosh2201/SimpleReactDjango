@@ -11,18 +11,23 @@ class App extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		var url = 'calculate/?x='+this.state.x+'&y='+this.state.y+'&o='+this.state.o;
-		axios({
-			url: url,
-			timeout: 20000,
-			method: 'get',
-			responseType: 'json'
-		})
-		.then(response => {
-			this.setState({ data: response.data });
-		})
-		.catch(response => {
-		})
+		if(data == parseInt(data, 10)) {
+			var url = 'calculate/?x='+this.state.x+'&y='+this.state.y+'&o='+this.state.o;
+			axios({
+				url: url,
+				timeout: 20000,
+				method: 'get',
+				responseType: 'json'
+			})
+			.then(response => {
+				this.setState({ data: response.data });
+			})
+			.catch(response => {
+				this.setState({ data: {'status': 'fail', 'result': 'Request failed' } });
+			})
+		} else {
+			this.setState({ data: {'status': 'fail', 'result': 'Please enter Integer input !!!' } });
+		}
 	}
 
 	render(){
@@ -32,11 +37,26 @@ class App extends React.Component {
 				<strong>Click!</strong> green button to use this output for next calculation.
 			</Tooltip>
 		);
+		const error = this.state.data && this.state.data.status && this.state.data.status != 'fail';
+		let outputBox = null;
+		if (error) {
+			outputBox = <Alert bsStyle="danger">
+				<strong>Error!</strong> {this.state.data.message}
+			</Alert>;
+		} else {
+			outputBox = <div className="wellStyles well">
+				<h4>Output </h4>
+				<OverlayTrigger placement="left" overlay={tooltip}>
+					<Badge>Hint</Badge>
+				</OverlayTrigger>
+				<Button bsStyle="success" id="output" bsSize="large" block onClick={e => this.setState({ x: this.state.data.result, y: 0, data: null})}> { this.state.data.result } </Button>
+			</div>;
+		}
 
 		return (
 			<div className="App">
 				<div className="App-header">
-					<h2>Simple Calculator</h2>
+					<h2>Simple Integer Calculator</h2>
 				</div>
 				<div className="App-content">
 					<Alert bsStyle="warning">
@@ -65,15 +85,7 @@ class App extends React.Component {
 						</Form>
 					</div>
 				</div>
-				{ this.state.data &&
-					<div className="wellStyles well">
-						<h4>Output </h4>
-						<OverlayTrigger placement="left" overlay={tooltip}>
-							<Badge>Hint</Badge>
-						</OverlayTrigger>
-						<Button bsStyle="success" id="output" bsSize="large" block onClick={e => this.setState({ x: this.state.data.result, y: 0, data: null})}> { this.state.data.result } </Button>
-					</div>
-				}
+				{ outputBox }
 			</div>
 		);
 	}
