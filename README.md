@@ -10,9 +10,6 @@
 * Gunicorn (WSGI Server)
 * Nginx server
 
-#### Using opensource react django boilerplate to build this application
-* https://github.com/UrangUrang/SimpleReactDjango
-
 #### Clone project:
 ```
 git clone git@github.uc.edu:nanchasr/SimpleReactDjango.git
